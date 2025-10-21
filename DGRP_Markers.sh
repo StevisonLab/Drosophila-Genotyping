@@ -26,7 +26,7 @@ Sequences=(`grep -v ">" DGRP_Marker1_Candidates.fa`)
 
 # Loop through these sequences and check that the variant falls within the restriction sequence (GAATTC)
 # Isolate sequences where this is true
-
+rm DGRP_Marker1_Candidates_2.fa
 for Seq in ${Sequences[@]}
 do GAATTC=`echo ${Seq:295:11} | grep "GAATTC"`
 	if [ -n "${GAATTC}" ]
@@ -41,12 +41,13 @@ done
 COUNTS=(`grep -no "GAATTC" DGRP_Marker1_Candidates_2.fa | uniq -c | awk '{print $1}'`)
 
 ROWS=(`grep -no "GAATTC" DGRP_Marker1_Candidates_2.fa | uniq -c | awk '{print $2}' | awk -F: '{print $1}'`)
-
-for ((LINE=1; LINE<=${#ROWS[@]}; LINE++))
+rm DGRP_Marker1.fa
+for ((LINE=0; LINE<=${#ROWS[@]}-1; LINE++))
 do
-	if [ ${COUNTS[${LINE}]} -eq 1 ]
-	then awk -v ROW=${ROWS[${LINE}]} 'NR==ROW-1' DGRP_Marker1_Candidates_2.fa >> DGRP_Marker1.fa
-	awk -v ROW=${ROWS[${LINE}]} 'NR==ROW' DGRP_Marker1_Candidates_2.fa >> DGRP_Marker1.fa
+# index COUNTS and ROWS using [@]:offset:length notation as this is apparently compatible between bash and zsh 
+        if [ ${COUNTS[@]:${LINE}:1} -eq 1 ]
+	then awk -v ROW=${ROWS[@]:${LINE}:1} 'NR==ROW-1' DGRP_Marker1_Candidates_2.fa >> DGRP_Marker1.fa
+	awk -v ROW=${ROWS[@]:${LINE}:1} 'NR==ROW' DGRP_Marker1_Candidates_2.fa >> DGRP_Marker1.fa
 	fi
 done
 
