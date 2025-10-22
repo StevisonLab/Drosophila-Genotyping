@@ -38,6 +38,7 @@ Sequences=(`grep -v ">" DGRP_Marker1_Candidates.fa`)
 # Isolate sequences where this is true
 rm DGRP_Marker1_Candidates_2.fa
 for Seq in ${Sequences[@]}
+# sequence is offset by 295 with a lengh of 11 to guarantee that the 6 letter sequence "GAATTC" should be present somewhere from 296-306 where position 301 is the position of the variant
 do GAATTC=`echo ${Seq:295:11} | grep "GAATTC"`
 	if [ -n "${GAATTC}" ]
 	then LINE=`grep -n -m 1 "${Seq}" DGRP_Marker1_Candidates.fa | awk -F: '{print $1}'`
