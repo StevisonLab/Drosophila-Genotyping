@@ -5,6 +5,16 @@
 # It is probably best to do this with a sed command like sed 's/Marker1/Marker2/g' to be certain all are replaced (this will also replace the string in these instructions)
 # Next, the bcftools command below must have genotypes changed appropriately so the logical pattern desired is found
 
+# The DGRP VCF file is provided in the initial link as a gzipped file. So it must be unzipped, rezipped via bgzip, and then tabix indexed for all later processing by bcftools.
+# A condition included to account for the possibility of the file being bgzipped already
+if file dgrp2.vcf.gz | grep -q "BGZF"
+then
+  tabix -f -p vcf dgrp2.vcf.gz
+else
+  gunzip dgrp2.vcf.gz
+  bgzip dgrp2.vcf
+fi
+
 # First bcftools view finds a genotype pattern in the given lines
 # The -i option tests if genotypes (GT) are homozygous reference (RR) or homozygous alternate (AA)
 # Genotypes are numbered by column number in VCF file
