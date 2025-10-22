@@ -8,7 +8,7 @@
 # First bcftools view finds a genotype pattern in the given lines
 # The -i option tests if genotypes (GT) are homozygous reference (RR) or homozygous alternate (AA)
 # Genotypes are numbered by column number in VCF file
-# This is piped to a bcftools query command isolate only the chromosome and position with -f
+# This is piped to a bcftools query command to isolate only the chromosome and position with -f
 # The -s option is not necessary but can help validate the command is working as intended, it must include a sample from the -s command in the previous command
 # This is piped to awk to print the chromosome number (with "chr" string appended at front to match reference FASTA file)
 # awk also will print the position (column $2) with 300 flanking base pairs to make a bed file
@@ -42,11 +42,11 @@ COUNTS=(`grep -no "GAATTC" DPSE_Marker1_Candidates_2.fa | uniq -c | awk '{print 
 
 ROWS=(`grep -no "GAATTC" DPSE_Marker1_Candidates_2.fa | uniq -c | awk '{print $2}' | awk -F: '{print $1}'`)
 
-for ((LINE=1; LINE<=${#ROWS[@]}; LINE++))
+for ((LINE=0; LINE<=${#ROWS[@]}-1; LINE++))
 do
-	if [ ${COUNTS[${LINE}]} -eq 1 ]
-	then awk -v ROW=${ROWS[${LINE}]} 'NR==ROW-1' DPSE_Marker1_Candidates_2.fa >> DPSE_Marker1.fa
-	awk -v ROW=${ROWS[${LINE}]} 'NR==ROW' DPSE_Marker1_Candidates_2.fa >> DPSE_Marker1.fa
+	if [ ${COUNTS[@]:${LINE}:1} -eq 1 ]
+	then awk -v ROW=${ROWS[@]:${LINE}:1} 'NR==ROW-1' DPSE_Marker1_Candidates_2.fa >> DPSE_Marker1.fa
+	awk -v ROW=${ROWS[@]:${LINE}:1} 'NR==ROW' DPSE_Marker1_Candidates_2.fa >> DPSE_Marker1.fa
 	fi
 done
 
