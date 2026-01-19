@@ -8,3 +8,9 @@ Both scripts utilize specific VCF and reference FASTA genomes. For DGRP the VCF 
 For DPSE the VCF file was produced in-house by Madison Watkins. The page for the reference FASTA file can be found on [NCBI](https://www.ncbi.nlm.nih.gov/data-hub/genome/GCF_009870125.1/). This will not immediately download the file, though NCBI provides the following curl command to download a folder containing the file on that page:
 
 `curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_009870125.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_009870125.1.zip" -H "Accept: application/zip"`
+
+## Citation
+This repository is part of the following publication:
+Shiran MG, Bailey NP, McCann L, Rivera-Rincón N, Saurette E, Stevison LS. 2026. Efficient RFLP-based Protocol for Routine Authentication of Drosophila. microPublication Biology. 10.17912/micropub.biology.001949
+
+The DOI for citing this repository is: [![DOI](https://zenodo.org/badge/637869317.svg)](https://doi.org/10.5281/zenodo.18303466)
