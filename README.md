@@ -11,6 +11,6 @@ For DPSE the VCF file was produced in-house by Madison Watkins. The page for the
 
 ## Citation
 This repository is part of the following publication:
-Shiran MG, Bailey NP, McCann L, Rivera-Rincón N, Saurette E, Stevison LS. 2026. Efficient RFLP-based Protocol for Routine Authentication of Drosophila. microPublication Biology. 10.17912/micropub.biology.001949
+Shiran MG, Bailey NP, McCann L, Rivera-Rincón N, Saurette E, Stevison LS. 2026. Efficient RFLP-based Protocol for Routine Authentication of Drosophila. microPublication Biology. [10.17912/micropub.biology.001949](https://micropublication.org/journals/biology/micropub-biology-001949)
 
 The DOI for citing this repository is: [![DOI](https://zenodo.org/badge/637869317.svg)](https://doi.org/10.5281/zenodo.18303466)
